@@ -19,4 +19,34 @@ public class CustomerServiceIMPL_Class implements CustomerService {
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
+
+    @Override
+    public void createCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public void updateCustomer(Customer customer, Long customerID) {
+        Customer existingCustomerObject = customerRepository.findById(customerID).get();
+        if(existingCustomerObject.getFirstName() != customer.getFirstName()) {
+            existingCustomerObject.setFirstName(customer.getFirstName());
+        }
+        if(existingCustomerObject.getLastName() != customer.getLastName()) {
+            existingCustomerObject.setLastName(customer.getLastName());
+        }
+        if(existingCustomerObject.getEmail() != customer.getEmail()) {
+            existingCustomerObject.setEmail(customer.getEmail());
+        }
+        if(existingCustomerObject.getPhoneNumber() != customer.getPhoneNumber()) {
+            existingCustomerObject.setPhoneNumber(customer.getPhoneNumber());
+        }
+        customerRepository.save(existingCustomerObject);
+    }
+
+    @Override
+    public void deleteCustomer(Long customerID) {
+        customerRepository.deleteById(customerID);
+    }
+
+
 }
