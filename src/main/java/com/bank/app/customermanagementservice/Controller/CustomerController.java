@@ -26,9 +26,9 @@ public class CustomerController {
     }
 
     @PostMapping("/public/customer/new/")
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<String> createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
-        return ResponseEntity.ok().body(customer);
+        return ResponseEntity.ok().body("Customer Created Successfully");
     }
 
     @PutMapping("public/customer/update/{customerID}")
